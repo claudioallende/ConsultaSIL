@@ -1,0 +1,112 @@
+﻿@model SILClient.Models.Class.Info.InfoViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles{
+    @Styles.Render("~/Content/datatables_columnfixed")
+    @Styles.Render("~/Content/spinner")
+}
+
+@using (Html.BeginForm("Index", "Info", FormMethod.Post, htmlAttributes: new { @class = "form-inline mb-2" }))
+{ 
+    <div class="form-group mr-4">
+        <label class="pr-3" for="Grano">Grano</label>
+        <input id="Grano" name="CodigoGrano" type="text" class="form-control form-control-sm" />
+    </div>
+    <div class="form-group mr-4">
+        <label class="pr-3" for="Comprador">Comprador</label>
+        <input id="Comprador" name="CuentaComprador" type="text" class="form-control form-control-sm" />
+    </div>
+    <div class="form-group mr-4">
+        <label class="pr-3" for="Puerto">Puerto</label>
+        <input id="Puerto" name="CuentaPuerto" type="text" class="form-control form-control-sm" />
+    </div>
+    <a id="btnActualizar" class="btn btn-primary btn-sm ml-auto" href="@Url.Action("Index")" title="Actualizar datos de pantalla">Actualizar</a>
+    @*<button type="submit" class="btn btn-primary">Buscar</button>*@
+}
+@if (SILClient.Models.Class.ClaimsUtil.GetClaimValue(User, "EsCuentaCYO") == "True")
+{
+    @Html.Partial("_TablaCyoPartial", Model);
+                                            if (Model.ListaResumenesInformadosStopNoCyo.Count != 0 || Model.ListaResumenesNoInformadosStopNoCyo.Count != 0)
+                                            {
+        <hr />
+        @Html.Partial("_TablaNoCyoPartial", Model, new ViewDataDictionary { { "ocultar_titulo", false } });
+                                            }
+}
+else
+{
+    @Html.Partial("_TablaNoCyoPartial", Model, new ViewDataDictionary { { "ocultar_titulo", true } });
+    <hr />
+    @Html.Partial("_TablaCyoPartial", Model);
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables_columnfixed")
+    @Scripts.Render("~/bundles/spinner")
+    <script type="text/javascript">
+        var datatables;
+        var btnActualizar = document.getElementById("btnActualizar");
+        var SpinnerActualizar = new Spinner(btnActualizar);
+
+        btnActualizar.onclick = function () {
+            SpinnerActualizar.mostrarSpinner();
+        }
+
+        $(document).ready(function () {
+            tables = convertirDataTable();
+            resizeDraw();
+
+            // Apply the search
+            var columnaGrano = tables.columns(0);
+            $("#Grano").keyup(function () {
+                columnaGrano
+                    .search(this.value)
+                    .draw();
+            });
+
+            var columnaComprador = tables.columns(1);
+            $("#Comprador").keyup(function () {
+                columnaComprador
+                    .search(this.value)
+                    .draw();
+            });
+
+            var columnaPuerto = tables.columns(2);
+            $("#Puerto").keyup(function () {
+                columnaPuerto
+                    .search(this.value)
+                    .draw();
+            });
+        });
+
+        function resizeDraw() {
+            $(window).resize(function(){
+                datatables.draw();
+            });
+        }
+
+        function convertirDataTable() {
+            datatables = $('.table').DataTable({
+                scrollX: true,
+                scrollY: "360px",
+                scrollCollapse: true,
+                paging: false,
+                //bFilter: false,
+                bInfo: false,
+                bSort: false,
+                fixedColumns: {
+                    leftColumns: 3,
+                    rightColumns: 1
+                },
+                "language": {
+                    "search": "Buscar:",
+                    "zeroRecords": "No hay datos en la tabla"
+                },
+                dom: '<"d-none"f>t'
+            });
+            return datatables;
+        }
+    </script>
+}

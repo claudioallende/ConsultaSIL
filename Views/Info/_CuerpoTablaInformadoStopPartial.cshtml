@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SILClient.Models.Class.Info.CuposAgrupadosPorVendedor>
+<tbody>
+    @foreach (SILClient.Models.Class.Info.CuposAgrupadosPorVendedor Resumen in Model)
+    {
+        string clase_fila = "";
+        if (Resumen.EsCYO()) { clase_fila = "cupo-cuenta_y_orden"; }
+        <tr>
+            <td class="text-nowrap @clase_fila">@Resumen.NOMGRANO</td>
+            <td class="text-nowrap">@Resumen.COMPRADOR</td>
+            <td class="text-nowrap">@Resumen.PUERTO</td>
+            @foreach (SILClient.Models.Class.Info.ResumenDia Dia in Resumen.GetDias())
+            {
+                <td class="text-center border-left">@Dia.TurnosOtorgados</td>
+                <td class="text-center">@Dia.TurnosConsumidos</td>
+            }
+            <td class="border-left">
+                <button type="submit" class="btn btn-primary btn-sm"
+                        value="@(Json.Encode(new
+                                   {
+                                       CuentaComprador = Resumen.COMPCTA,
+                                       CuentaPuerto = Resumen.PUERTOCTA,
+                                       CodigoGrano = Resumen.GRANO,
+                                       Consignacion = Resumen.GetCuitConsignacion(),
+                                       InformadoStop = true,
+                                       EsCYO = Resumen.EsCYO()
+                                   }))"
+                        name="JsonId">
+                    <span class="oi oi-list"></span>
+                </button>
+            </td>
+        </tr>
+    }
+</tbody>
+<tfoot>
+    <tr class="text-center font-weight-bold">
+        <td colspan="3"></td>
+        <td class="border-left">@Model.Sum(x => x.D0CO)</td>
+        <td>@Model.Sum(x => x.D0CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D1CO)</td>
+        <td>@Model.Sum(x => x.D1CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D2CO)</td>
+        <td>@Model.Sum(x => x.D2CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D3CO)</td>
+        <td>@Model.Sum(x => x.D3CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D4CO)</td>
+        <td>@Model.Sum(x => x.D4CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D5CO)</td>
+        <td>@Model.Sum(x => x.D5CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D6CO)</td>
+        <td>@Model.Sum(x => x.D6CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D7CO)</td>
+        <td>@Model.Sum(x => x.D7CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D8CO)</td>
+        <td>@Model.Sum(x => x.D8CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D9CO)</td>
+        <td>@Model.Sum(x => x.D9CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D10CO)</td>
+        <td>@Model.Sum(x => x.D10CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D11CO)</td>
+        <td>@Model.Sum(x => x.D11CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D12CO)</td>
+        <td>@Model.Sum(x => x.D12CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D13CO)</td>
+        <td>@Model.Sum(x => x.D13CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D14CO)</td>
+        <td>@Model.Sum(x => x.D14CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D15CO)</td>
+        <td>@Model.Sum(x => x.D15CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D16CO)</td>
+        <td>@Model.Sum(x => x.D16CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D17CO)</td>
+        <td>@Model.Sum(x => x.D17CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D18CO)</td>
+        <td>@Model.Sum(x => x.D18CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D19CO)</td>
+        <td>@Model.Sum(x => x.D19CC)</td>
+        <td class="border-left">@Model.Sum(x => x.D20CO)</td>
+        <td>@Model.Sum(x => x.D20CC)</td>
+        <td class="border-left"></td>
+    </tr>
+</tfoot>
+

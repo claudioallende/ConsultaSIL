@@ -1,0 +1,150 @@
+﻿@model SILClient.Models.Class.Reporte.FiltroReporteViewModel
+
+@{
+    ViewBag.Title = "Reporte";
+}
+
+@section Styles{
+    @Styles.Render("~/Content/datepicker")
+    @Styles.Render("~/Content/spinner")
+    <link href="~/Content/datatables-excel.min.css" rel="stylesheet" />
+}
+
+<div>
+    <form class="form-inline mb-3">
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaDesde)
+            @Html.EditorFor(model => model.FechaDesde, new { htmlAttributes = new { @class = "form-control ml-2 mr-4 form-control-sm" } })
+            @Html.ValidationMessageFor(model => model.FechaDesde, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaHasta)
+            @Html.EditorFor(model => model.FechaHasta, new { htmlAttributes = new { @class = "form-control ml-2 mr-4 form-control-sm" } })
+            @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Granos)
+            @Html.DropDownListFor(model => model.Grano, Model.Granos, htmlAttributes: new { @class = "form-control form-control-sm ml-2 mr-4" }, optionLabel: "--Seleccione--")
+            @Html.ValidationMessageFor(model => model.Granos, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <button type="button" id="btnBuscar" class="btn btn-primary btn-sm">Buscar</button>
+        </div>
+    </form>
+
+    <table id="tablaReporte" class="table table-striped table-sm table-font-sm" style="width:100%">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Grano</th>
+                <th>Destinatario</th>
+                <th>Puerto</th>
+                <th>Cupo</th>
+                <th>Solicitante</th>
+                <th>Intermediario</th>
+                <th>Rte. Comercial</th>
+                <th>Corr. Compr.</th>
+                <th>MAT</th>
+                <th>Corr. Vend</th>
+                <th>Repres./Entr.</th>
+                <th>Detalle STOP</th>
+                <th>Observación</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/spinner")
+    <script src="~/Scripts/datatables-excel.min.js"></script>
+    <script type="text/javascript">
+        var model = {
+            Tabla: document.getElementById("tablaReporte"),
+            datatable: null
+        }
+
+        var SpinnerBtnBuscar = new Spinner(document.getElementById("btnBuscar"));
+
+        //Datepicker
+        $("#FechaDesde, #FechaHasta").datepicker({
+            dateFormat: "dd/mm/yy",
+            dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+            dayNamesMin: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        });
+
+        function construirDataTable() {
+            model.datatable = $('#tablaReporte').DataTable({
+                "ajax": {
+                    "data": {
+                        "FechaDesde": function () { return document.getElementById("FechaDesde").value },
+                        "FechaHasta": function () { return document.getElementById("FechaHasta").value },
+                        "Grano": function () { return document.getElementById("Grano").value }
+                    },
+                    "url": '@Url.Action("GetReporte")',
+                    "type": "POST"
+                },
+                "deferLoading": 0, //para que no se ejecute el ajax al inicio
+                "serverSide": true,
+                "columns": [
+                    { "data": "FechaFormateada" },
+                    { "data": "Grano", "className": "text-nowrap" },
+                    { "data": "Exportador", "className": "text-nowrap" },
+                    { "data": "Destino", "className": "text-nowrap" },
+                    { "data": "Alfanumerico" },
+                    { "data": "Solicitante", "className": "text-nowrap" },
+                    { "data": "Intermediario", "className": "text-nowrap" },
+                    { "data": "RteComercial", "className": "text-nowrap" },
+                    { "data": "CorredorComp", "className": "text-nowrap" },
+                    { "data": "Mat", "className": "text-nowrap" },
+                    { "data": "CorredorVend", "className": "text-nowrap" },
+                    { "data": "Rteent", "className": "text-nowrap" },
+                    { "data": "DetalleCupoSTOP" },
+                    { "data": "Observacion" },
+                ],
+                paging: false,
+                bFilter: false,
+                bInfo: false,
+                bSort: false,
+                dom: '<"text-right"B>frtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar'
+                    },
+                    'csv', 'excel'
+                ],
+                language: {
+                    "zeroRecords": "No hay datos en la tabla",
+                    "infoEmpty": "No hay datos en la tabla",
+                    "processing": "Procesando...",
+                    "loadingRecords": "Cargando...",
+                },
+                "createdRow": function( row, data, dataIndex){
+                    if( data.Vendcyo !=  0 && data.Vendcyo == data.CuentaVendedor){
+                        $(row).children().first().addClass('cupo-cuenta_y_orden');
+                    }
+                },
+                "scrollX": true,
+                scrollY: "65vh"
+            });
+        }
+
+        function buscar() {
+            SpinnerBtnBuscar.mostrarSpinner();
+            model.datatable.ajax.reload(function () {
+                SpinnerBtnBuscar.ocultarSpinner();
+            });
+        }
+
+        document.getElementById("btnBuscar").onclick = function () {
+            buscar();
+        }
+
+        $(document).ready(function () {
+            construirDataTable();
+        });
+    </script>
+}

@@ -1,0 +1,68 @@
+﻿@model SILClient.Models.Class.Info.InfoViewModel
+@if (ViewData["ocultar_titulo"] == "True") {
+    <h3>No Cuenta y Orden</h3>
+}
+<h5>Informados a STOP</h5>
+@using (Html.BeginForm("Detalle", "Info", FormMethod.Post, htmlAttributes: new { @class = "mb-4" }))
+{
+    <div>
+        <table class="table table-sm table-font-sm table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    @foreach (DateTime Dia in Model.Dias)
+                    {
+                        <th colspan="2" class="border-left">@Dia.ToString("dd/MM")</th>
+                    }
+                    <th class="border-left"></th>
+                </tr>
+                <tr>
+                    <th>Grano</th>
+                    <th>Comprador</th>
+                    <th>Puerto</th>
+                    @for (var i = 0; i < Model.Dias.Count; i++)
+                    {
+                        <th class="border-left">TO</th>
+                        <th>TC</th>
+                    }
+                    <th class="border-left"></th>
+                </tr>
+            </thead>
+            @Html.Partial("_CuerpoTablaInformadoStopPartial", Model.ListaResumenesInformadosStopNoCyo)
+        </table>
+    </div>
+}
+
+<h5>No Informados a STOP</h5>
+@using (Html.BeginForm("Detalle", "Info", FormMethod.Post))
+{
+    <div>
+        <table class="table table-sm table-font-sm table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    @foreach (DateTime Dia in Model.Dias)
+                    {
+                        <th class="border-left">@Dia.ToString("dd/MM")</th>
+                    }
+                    <th class="border-left"></th>
+                </tr>
+                <tr>
+                    <th>Grano</th>
+                    <th>Comprador</th>
+                    <th>Puerto</th>
+                    @for (var i = 0; i < Model.Dias.Count; i++)
+                    {
+                        <th class="border-left">TO</th>
+                    }
+                    <th class="border-left"></th>
+                </tr>
+            </thead>
+            @Html.Partial("_CuerpoTablaNoInformadoStopPartial", Model.ListaResumenesNoInformadosStopNoCyo)
+        </table>
+    </div>
+}

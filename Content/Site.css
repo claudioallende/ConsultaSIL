@@ -1,0 +1,343 @@
+﻿:root {
+    --color-primario: #1baade;
+    --color-primario-activo: #1899c7;
+}
+
+html {
+    font-size:15px;
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+    font-family: Arial;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+table th {
+    text-align:center;
+}
+
+.table-sm .btn {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.73rem;
+}
+
+.codigos-alfanumericos {
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.codigos-alfanumericos > .list-group-item {
+    padding: 0.25rem 0.7rem;
+}
+
+.table--fixed{
+    table-layout: fixed;
+}
+
+.table--fixed .col--40{
+    width: 40%;
+}
+
+.table--fixed .col--30{
+    width: 30%;
+}
+
+.table--fixed .col--25{
+    width: 25%;
+}
+
+.table--fixed .col--20{
+    width: 20%;
+}
+
+.table--fixed .col--15{
+    width: 15%;
+}
+
+.table--fixed .col--10{
+    width: 10%;
+}
+
+.table--fixed .col--7{
+    width: 7%;
+}
+
+.table--fixed .col--100{
+    width: 100%;
+}
+
+.table--fixed .col--sm-boton{
+    width:33px;
+}
+
+.table-font-sm thead th{
+    font-size: 0.9rem;
+}
+
+.table-font-sm tbody td,
+.table-font-sm tfoot td{
+    font-size: 0.82rem;
+}
+
+@media (min-width: 992px){
+    .modal-xl {
+        max-width: 1200px;
+    }
+}
+
+.bg-blue{
+    background-color: #4682B4;
+}
+
+.btn-primary{
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-indigo,
+.btn-informado {
+    color: white;
+    background-color: #6610f2;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle{
+    background-color:var(--color-primario-activo);
+    border-color:var(--color-primario-activo);
+}
+
+.btn-primary:hover{
+    background-color: var(--color-primario-activo);
+    border-color: var(--color-primario-activo);
+}
+
+.btn.disabled, .btn:disabled {
+    background-color: grey;
+    border-color: grey;
+}
+
+.navbar{
+    padding:0;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+}
+
+.logo {
+    height: 50px;
+}
+
+button.icon-li{
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.icon-li{
+    float: right;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+.tabla-filas-seleccionables tr {
+    cursor: pointer;
+}
+
+.aviso-repetido{
+    padding: .4rem .2rem;
+    display:none;
+}
+
+.container_tamano_pagina-filtro-botones{
+    max-height: 66.5vh;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+
+.marca_fila td:first-of-type {
+    border-left: 10px solid var(--color-primario-activo);
+}
+
+.pendiente_distribuir {    
+    background-color: #c3e6cb;
+}
+
+.pendiente_distribuir > td {    
+    border-top: 1px solid;
+    border-color: #8fd19e;
+}
+
+.indigo_claro,
+.informado {
+    background-color: #efe7fd;
+}
+
+.indigo_claro > td,
+.informado > td {
+    border-top: 1px solid;
+    border-color: #bfb8ca;
+}
+
+.amarillo_claro,
+.distribuido {
+    background-color: #fff2cd;
+}
+
+.distribuido-borde {
+    border-left-width: 8px;
+    border-left-style: solid;
+    border-left-color: #28a745;
+}
+
+.amarillo_claro > td,
+.distribuido > td {
+    border-top: 1px solid;
+    border-color: #ffdf7e;
+}
+
+.anulado {
+    background-color: #f5c6cb;
+}
+
+.anulado > td {
+    border-top: 1px solid;
+    border-color: #ed969e;
+}
+
+.distribucion_anulada_no_informada {
+}
+
+.dropdown-button-multiselect::after {
+    position:absolute;
+    right: 5px;
+    top:50%;
+    transform: translateY(-50%);
+}
+.dropdown-button-multiselect {
+    text-align:left;
+}
+
+.table td {
+    vertical-align: inherit;
+}
+
+.row-scrollx {
+    overflow-x:auto;
+    width:100%;
+    margin-bottom: 10px;
+}
+
+.button-checked::before {
+    position: absolute;
+    left: 1.7rem;
+    top:50%;
+    transform: translateY(-50%);
+    content: '✓';
+    font-weight: 600;
+    color:white;
+}
+.btn-group-toggle>.btn {
+    padding-left:2rem;
+}
+.btn-outline-primary{
+    color: var(--color-primario);
+    border-color:var(--color-primario);
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active{
+    color: #fff;
+    background-color: var(--color-primario-activo);
+    border-color: var(--color-primario-activo);
+}
+/*.btn-outline-primary.focus, .btn-outline-primary:focus{
+    box-shadow: 0 0 0 0.2rem rgb(49,178,225);
+}*/
+/*.btn-outline-primary:not(:disabled):not(.disabled).active:focus{
+        box-shadow: 0 0 0 0.2rem rgb(24,153,199);
+}*/
+
+/*Datatables*/
+.DTFC_RightBodyLiner,
+.DTFC_LeftBodyLiner {
+    overflow-x:hidden;
+}
+
+.transparente {
+    max-height: 460px;
+    max-width: 100vw;
+    overflow:auto;
+}
+
+.transparente table tbody {
+    visibility:hidden;
+}
+
+.max-width-alfanumerico {
+    max-width: 250px;
+}
+
+.cupo-consumido {
+    border-left: 5px solid green;
+}
+
+.cupo-cuenta_y_orden {
+    border-left: 5px solid #1baade;
+}
+
+.subitem-lista {
+    font-weight: bold;
+}
+
+.grupo {
+    background-color: #e9ecef;
+    padding: .7rem 1.5rem;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+
+ul.list-group.list-group-flush li:first-child {
+    border-top-style: none;
+}
+ul.list-group.list-group-flush li:last-child {
+    border-bottom-style: none;
+}
+
+ul.list-group.list-group-flush li.list-group-item{
+    padding: 0.5rem 1rem;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(odd){
+    background: white;
+}
+ul.list-group.list-group-striped li:nth-of-type(even){
+    background: rgba(0,0,0,.03);
+}
+ul.list-group.list-group-striped li.list-group-item{
+    border-color:rgb(230,230,230);/*#dee2e6;*/
+}

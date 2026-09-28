@@ -1,0 +1,70 @@
+﻿@model SILClient.Models.Class.Info.DetalleViewModel
+
+<ul class="list-group list-group-striped list-group-flush">
+    @Html.Partial("_ConsignacionPartialView", Model.GetConsignacionOrEmpty())
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-3">
+                <span>Destino</span>
+            </div>
+            <div class="col-2">
+                <span>@Model.Puerto.Cuit.Insert(Model.Puerto.Cuit.Length - 1, "-").Insert(2, "-")</span>
+            </div>
+            <div class="col-7">
+                <span>@Model.Puerto.Nombre</span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-3">
+                <span>Grano</span>
+            </div>
+            <div class="col-9">
+                <span>@Model.Grano.Nombre</span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-3">
+                <span>Dirección</span>
+            </div>
+            <div class="col-9">
+                <span>@Model.Puerto.Domicilio - @Model.Puerto.Cpostal @Model.Puerto.Nombre</span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-3">
+                <span>Nº de Planta</span>
+            </div>
+            <div class="col-9">
+                <span>@Model.Puerto.Ruca</span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div>
+            <label>Observaciones</label>
+            @foreach (var Observacion in Model.GetObservaciones())
+            {
+                <div class="grupo">
+                    <p><small>@Observacion.Valor</small></p>
+                </div>
+            }
+        </div>
+    </li>
+</ul>
+
+<div class="row flex-row flex-nowrap row-scrollx mt-3">
+    @if (Model.AlfanumericosPorDia != null)
+    {
+        for (int Dia = 0; Dia < Model.AlfanumericosPorDia.Count; Dia++)
+        {
+            @Html.Partial("_AlfanumericosPorDia", Model.AlfanumericosPorDia[Dia])
+        }
+    }
+</div>

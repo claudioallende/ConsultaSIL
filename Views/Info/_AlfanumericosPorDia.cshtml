@@ -1,0 +1,14 @@
+﻿@model SILClient.Models.Class.Info.AlfanumericosDia
+<div class="col max-width-alfanumerico">
+    <div class="form-group text-center">
+        <label class="font-weight-bold">@Model.Dia.ToString("dd/MM")</label>
+        <ul class="list-group codigos-alfanumericos">
+            @foreach (var Alfanumerico in Model.Alfanumericos)
+            {
+                string cupo_consumido = "";
+                if (Alfanumerico.EstaConsumido) { cupo_consumido = "cupo-consumido"; }
+                <li class="list-group-item px-4 @cupo_consumido">@Alfanumerico.Alfanumerico</li>
+            }
+        </ul>
+    </div>
+</div>
