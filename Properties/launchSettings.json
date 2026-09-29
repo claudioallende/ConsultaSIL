@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IIS Express (ConsultaSIL)": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\IIS Express\\iisexpress.exe",
+      "commandLineArgs": "/path:\"$(ProjectDir).\" /port:62392 /clr:v4.0",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}
