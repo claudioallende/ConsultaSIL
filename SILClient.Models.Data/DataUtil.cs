@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
@@ -24,7 +25,7 @@ public class DataUtil : IDisposable
 	{
 		string token = GetTokenAsync();
 		HttpClient client = new HttpClient();
-		client.SetBearerToken(token);
+		client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 		return JArray.Parse(await client.GetStringAsync(GetWSCuposCorretajeCliente() + Action)).ToString();
 	}
 
@@ -32,7 +33,7 @@ public class DataUtil : IDisposable
 	{
 		string token = GetTokenAsync();
 		HttpClient client = new HttpClient();
-		client.SetBearerToken(token);
+		client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 		return await DeserializeAsync<T>(await client.GetStringAsync(GetWSCuposCorretajeCliente() + "/" + Action));
 	}
 
@@ -40,7 +41,7 @@ public class DataUtil : IDisposable
 	{
 		string token = GetTokenAsync();
 		HttpClient client = new HttpClient();
-		client.SetBearerToken(token);
+		client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 		string jsonString = JsonConvert.SerializeObject(Data);
 		HttpResponseMessage json = await client.PostAsync(content: new StringContent(jsonString, Encoding.UTF8, "application/json"), requestUri: GetWSCuposCorretajeCliente() + "/" + Action);
 		if (json.StatusCode == HttpStatusCode.NotFound)

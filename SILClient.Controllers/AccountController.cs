@@ -79,24 +79,4 @@ public class AccountController : Controller
 			return View(model);
 		}
 	}
-
-	public async Task<ActionResult> Autent(string idToken)
-	{
-		int num = default;
-		_ = num;
-		_ = 0;
-		try
-		{
-			if (await SignInManager.AcabaseSignInAsync(idToken) == SignInStatus.Success)
-			{
-				return RedirectToAction("Index", "Info");
-			}
-			return RedirectToAction("Login");
-		}
-		catch (Exception)
-		{
-			ModelState.AddModelError("", "Error");
-			return RedirectToAction("Login");
-		}
-	}
 }

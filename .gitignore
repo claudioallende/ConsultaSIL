@@ -1,3 +1,5 @@
 bin/
 obj/
 /Web.config
+.vs/
+/App_Data/usuarios.json*

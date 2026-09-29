@@ -28,9 +28,6 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\..\Compilado\ConsultaSIL\bin\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="IdentityModel.Net45">
-      <HintPath>..\..\Compilado\ConsultaSIL\bin\IdentityModel.Net45.dll</HintPath>
-    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\Compilado\ConsultaSIL\bin\NLog.dll</HintPath>
     </Reference>
@@ -55,9 +52,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="RestSharp">
-      <HintPath>..\..\Compilado\ConsultaSIL\bin\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.WebPages">
       <HintPath>..\..\Compilado\ConsultaSIL\bin\System.Web.WebPages.dll</HintPath>
     </Reference>
