@@ -5,7 +5,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SILClient.Models.Auth;
 
-namespace SILClient.Models.Class.Account;
+namespace SILClient.Models.Class.Account
+{
 
 public class SignInManager : SignInManager<Usuario, string>
 {
@@ -56,4 +57,5 @@ public class SignInManager : SignInManager<Usuario, string>
 		UserManager userManager = UserManager as UserManager;
 		userManager.SetClaim(key, value);
 	}
+}
 }

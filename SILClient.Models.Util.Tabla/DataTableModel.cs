@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace SILClient.Models.Util.Tabla;
+namespace SILClient.Models.Util.Tabla
+{
 
 public class DataTableModel
 {
@@ -15,4 +16,5 @@ public class DataTableModel
 	public Search search { get; set; }
 
 	public List<Order> order { get; set; }
+}
 }

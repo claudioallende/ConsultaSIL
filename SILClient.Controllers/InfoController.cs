@@ -6,7 +6,8 @@ using SILClient.Models.Class.Filtro;
 using SILClient.Models.Class.Info;
 using SILClient.Models.Services;
 
-namespace SILClient.Controllers;
+namespace SILClient.Controllers
+{
 
 [Authorize]
 public class InfoController : Controller
@@ -47,4 +48,5 @@ public class InfoController : Controller
 		}
 		return View(model);
 	}
+}
 }

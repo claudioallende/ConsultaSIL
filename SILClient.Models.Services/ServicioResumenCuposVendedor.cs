@@ -5,7 +5,8 @@ using SILClient.Models.Class.Filtro;
 using SILClient.Models.Class.Info;
 using SILClient.Models.Data;
 
-namespace SILClient.Models.Services;
+namespace SILClient.Models.Services
+{
 
 public class ServicioResumenCuposVendedor
 {
@@ -35,4 +36,5 @@ public class ServicioResumenCuposVendedor
 	{
 		return await CuposClienteStore.GetGranos();
 	}
+}
 }

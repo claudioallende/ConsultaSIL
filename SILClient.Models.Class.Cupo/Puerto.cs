@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SILClient.Models.Class.Cupo;
+namespace SILClient.Models.Class.Cupo
+{
 
 public class Puerto
 {
@@ -28,4 +29,5 @@ public class Puerto
 	public virtual long Cpostal { get; set; }
 
 	public virtual string Ruca { get; set; }
+}
 }

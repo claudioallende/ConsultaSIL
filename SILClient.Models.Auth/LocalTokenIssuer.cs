@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-namespace SILClient.Models.Auth;
+namespace SILClient.Models.Auth
+{
 
 // Arma el access_token que antes emitia IdentityServer3 (acabase.com.ar). JWT_ISSUER, JWT_AUDIENCE
 // y JWT_SIGNING_KEY deben ser IDENTICOS a los de CuposCorretajeWeb y SILResourceServer: la API
@@ -38,4 +39,5 @@ public static class LocalTokenIssuer
 	{
 		return (values ?? new List<long>()).Select((long v) => v.ToString()).ToList();
 	}
+}
 }

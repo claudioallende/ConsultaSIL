@@ -1,6 +1,7 @@
 using SILClient.Models.Class.Cupo;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class IdentificadorDetalle
 {
@@ -17,4 +18,5 @@ public class IdentificadorDetalle
 	public bool InformadoStop { get; set; }
 
 	public bool EsCYO { get; set; }
+}
 }

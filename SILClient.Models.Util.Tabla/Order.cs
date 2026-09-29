@@ -1,8 +1,10 @@
-namespace SILClient.Models.Util.Tabla;
+namespace SILClient.Models.Util.Tabla
+{
 
 public class Order
 {
 	public int column { get; set; }
 
 	public string dir { get; set; }
+}
 }

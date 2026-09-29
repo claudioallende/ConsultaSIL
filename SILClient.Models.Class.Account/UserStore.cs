@@ -4,7 +4,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace SILClient.Models.Class.Account;
+namespace SILClient.Models.Class.Account
+{
 
 public class UserStore : IUserPasswordStore<Usuario, string>, IUserLockoutStore<Usuario, string>, IUserTwoFactorStore<Usuario, string>, IUserStore<Usuario, string>, IDisposable
 {
@@ -112,4 +113,5 @@ public class UserStore : IUserPasswordStore<Usuario, string>, IUserLockoutStore<
 	{
 		throw new NotImplementedException();
 	}
+}
 }

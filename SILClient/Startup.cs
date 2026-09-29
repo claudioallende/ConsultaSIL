@@ -6,7 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using SILClient.Models.Class.Account;
 
-namespace SILClient;
+namespace SILClient
+{
 
 public class Startup
 {
@@ -23,4 +24,5 @@ public class Startup
 			ExpireTimeSpan = TimeSpan.FromMinutes(15.0)
 		});
 	}
+}
 }

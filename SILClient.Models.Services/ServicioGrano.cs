@@ -1,5 +1,7 @@
-namespace SILClient.Models.Services;
+namespace SILClient.Models.Services
+{
 
 public class ServicioGrano
 {
+}
 }

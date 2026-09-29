@@ -1,6 +1,7 @@
 using System;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class ResumenDia
 {
@@ -9,4 +10,5 @@ public class ResumenDia
 	public int TurnosOtorgados { get; set; }
 
 	public int TurnosConsumidos { get; set; }
+}
 }

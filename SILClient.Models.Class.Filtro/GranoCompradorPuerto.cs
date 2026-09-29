@@ -1,4 +1,5 @@
-namespace SILClient.Models.Class.Filtro;
+namespace SILClient.Models.Class.Filtro
+{
 
 public class GranoCompradorPuerto
 {
@@ -13,4 +14,5 @@ public class GranoCompradorPuerto
 	public long CuentaPuerto { get; set; }
 
 	public string NombrePuerto { get; set; }
+}
 }

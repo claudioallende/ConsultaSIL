@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 
-namespace SILClient.Controllers;
+namespace SILClient.Controllers
+{
 
 [Authorize]
 public class DocController : Controller
@@ -9,4 +10,5 @@ public class DocController : Controller
 	{
 		return File(Server.MapPath("~/Manuales/") + filename, "application/pdf", filename);
 	}
+}
 }

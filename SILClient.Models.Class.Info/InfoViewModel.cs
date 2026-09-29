@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class InfoViewModel
 {
@@ -48,4 +49,5 @@ public class InfoViewModel
 		}
 		return list;
 	}
+}
 }

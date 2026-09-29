@@ -1,4 +1,5 @@
-namespace SILClient.Models.Class.Cupo;
+namespace SILClient.Models.Class.Cupo
+{
 
 public class Grano
 {
@@ -7,4 +8,5 @@ public class Grano
 	public virtual int CodigoGrano { get; set; }
 
 	public virtual string Nombre { get; set; }
+}
 }

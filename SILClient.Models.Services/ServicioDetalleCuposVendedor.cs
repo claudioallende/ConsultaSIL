@@ -4,7 +4,8 @@ using SILClient.Models.Class.Cupo;
 using SILClient.Models.Class.Info;
 using SILClient.Models.Data;
 
-namespace SILClient.Models.Services;
+namespace SILClient.Models.Services
+{
 
 public class ServicioDetalleCuposVendedor
 {
@@ -13,4 +14,5 @@ public class ServicioDetalleCuposVendedor
 		CuposClienteStore cuposClienteStore = new CuposClienteStore();
 		return cuposClienteStore.GetDetalleCupoCliente(CuentaComprador, CuentaPuerto, CodigoGrano, Consignacion, InformadoStop, EsCYO);
 	}
+}
 }

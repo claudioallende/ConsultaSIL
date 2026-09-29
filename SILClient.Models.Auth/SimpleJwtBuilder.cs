@@ -4,7 +4,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace SILClient.Models.Auth;
+namespace SILClient.Models.Auth
+{
 
 // Emite un JWT HS256 sin paquetes extra. Copia de CuposCorretajeWeb (SILWeb): SILResourceServer
 // lo valida con UseJwtBearerAuthentication usando la misma clave simetrica (JWT_SIGNING_KEY).
@@ -33,13 +34,16 @@ public static class SimpleJwtBuilder
 		string headerB64 = Base64UrlEncode(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header)));
 		string payloadB64 = Base64UrlEncode(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload)));
 		string unsigned = headerB64 + "." + payloadB64;
-		using HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(signingKey));
+		using (HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(signingKey)))
+		{
 		byte[] signature = hmac.ComputeHash(Encoding.UTF8.GetBytes(unsigned));
 		return unsigned + "." + Base64UrlEncode(signature);
+		}
 	}
 
 	private static string Base64UrlEncode(byte[] bytes)
 	{
 		return Convert.ToBase64String(bytes).TrimEnd('=').Replace('+', '-').Replace('/', '_');
 	}
+}
 }

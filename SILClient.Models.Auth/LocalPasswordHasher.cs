@@ -1,7 +1,8 @@
 using System;
 using System.Security.Cryptography;
 
-namespace SILClient.Models.Auth;
+namespace SILClient.Models.Auth
+{
 
 // PBKDF2-HMACSHA1 (Rfc2898DeriveBytes), mismo esquema que CuposCorretajeWeb (SILWeb) y que
 // App_Data/Generar-UsuariosJson.ps1, para que los hashes generados por el script verifiquen aca.
@@ -21,9 +22,11 @@ public static class LocalPasswordHasher
 		}
 		byte[] salt = Convert.FromBase64String(saltBase64);
 		byte[] expectedHash = Convert.FromBase64String(hashBase64);
-		using Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations);
+		using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
+		{
 		byte[] actualHash = pbkdf2.GetBytes(expectedHash.Length);
 		return FixedTimeEquals(actualHash, expectedHash);
+		}
 	}
 
 	private static bool FixedTimeEquals(byte[] a, byte[] b)
@@ -39,4 +42,5 @@ public static class LocalPasswordHasher
 		}
 		return diff == 0;
 	}
+}
 }

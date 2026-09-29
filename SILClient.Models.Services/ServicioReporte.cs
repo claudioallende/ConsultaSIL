@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using SILClient.Models.Class.Reporte;
 using SILClient.Models.Data;
 
-namespace SILClient.Models.Services;
+namespace SILClient.Models.Services
+{
 
 public class ServicioReporte
 {
@@ -12,4 +13,5 @@ public class ServicioReporte
 		ReporteStore Store = new ReporteStore();
 		return await Store.GetReporte(filtro);
 	}
+}
 }

@@ -1,5 +1,7 @@
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class DetalleCliente
 {
+}
 }

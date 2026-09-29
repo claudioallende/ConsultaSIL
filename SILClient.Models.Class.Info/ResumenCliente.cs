@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class ResumenCliente
 {
@@ -11,4 +12,5 @@ public class ResumenCliente
 	public string Puerto { get; set; }
 
 	public IList<ResumenDia> Dias { get; set; }
+}
 }

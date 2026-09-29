@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using SILClient.Models.Class.Cupo;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class DetalleViewModel
 {
@@ -60,4 +61,5 @@ public class DetalleViewModel
 			Valor = x.Key
 		}).ToList();
 	}
+}
 }

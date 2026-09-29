@@ -3,7 +3,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace SILClient;
+namespace SILClient
+{
 
 public class MvcApplication : HttpApplication
 {
@@ -14,4 +15,5 @@ public class MvcApplication : HttpApplication
 		RouteConfig.RegisterRoutes(RouteTable.Routes);
 		BundleConfig.RegisterBundles(BundleTable.Bundles);
 	}
+}
 }

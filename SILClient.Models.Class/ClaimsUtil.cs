@@ -5,7 +5,8 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
 
-namespace SILClient.Models.Class;
+namespace SILClient.Models.Class
+{
 
 public static class ClaimsUtil
 {
@@ -50,4 +51,5 @@ public static class ClaimsUtil
 		Claim claim = claims.FirstOrDefault((Claim c) => c.Type == key);
 		return claim.Value;
 	}
+}
 }

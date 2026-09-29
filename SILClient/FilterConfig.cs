@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 
-namespace SILClient;
+namespace SILClient
+{
 
 public class FilterConfig
 {
@@ -8,4 +9,5 @@ public class FilterConfig
 	{
 		filters.Add(new HandleErrorAttribute());
 	}
+}
 }

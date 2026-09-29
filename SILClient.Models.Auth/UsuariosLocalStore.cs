@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web.Hosting;
 using Newtonsoft.Json;
 
-namespace SILClient.Models.Auth;
+namespace SILClient.Models.Auth
+{
 
 // Fuente de usuarios que reemplaza al SSO acabase.com.ar: App_Data/usuarios.json (no se versiona,
 // se deploya aparte). Se relee en cada login (sin cache) para que un cambio manual en el servidor
@@ -31,4 +32,5 @@ public static class UsuariosLocalStore
 		}
 		return JsonConvert.DeserializeObject<UsuariosLocalFile>(File.ReadAllText(path));
 	}
+}
 }

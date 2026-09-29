@@ -2,7 +2,8 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SILClient.Controllers;
+namespace SILClient.Controllers
+{
 
 public class HomeController : Controller
 {
@@ -28,4 +29,5 @@ public class HomeController : Controller
 		Request.GetOwinContext().Authentication.SignOut();
 		return Redirect("/");
 	}
+}
 }

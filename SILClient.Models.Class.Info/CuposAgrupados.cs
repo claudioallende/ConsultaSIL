@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class CuposAgrupados
 {
@@ -11,4 +12,5 @@ public class CuposAgrupados
 	public IList<CuposAgrupadosPorVendedor> CuposInformadosSTOPNoCyo { get; set; }
 
 	public IList<CuposAgrupadosPorVendedor> CuposNoInformadosSTOPNoCyo { get; set; }
+}
 }

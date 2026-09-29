@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace SILClient.Models.Auth;
+namespace SILClient.Models.Auth
+{
 
 // Usuario de App_Data/usuarios.json (reemplazo del SSO acabase.com.ar, dado de baja).
 // Mismo esquema de password que CuposCorretajeWeb (SILWeb), mas las cuentas vendedoras que puede
@@ -37,4 +38,5 @@ public class UsuariosLocalFile
 	public string Nota { get; set; }
 
 	public IList<UsuarioLocal> Usuarios { get; set; }
+}
 }

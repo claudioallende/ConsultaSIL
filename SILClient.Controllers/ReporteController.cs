@@ -9,7 +9,8 @@ using SILClient.Models.Class.Reporte;
 using SILClient.Models.Data;
 using SILClient.Models.Services;
 
-namespace SILClient.Controllers;
+namespace SILClient.Controllers
+{
 
 [Authorize]
 public class ReporteController : Controller
@@ -49,4 +50,5 @@ public class ReporteController : Controller
 			throw ex;
 		}
 	}
+}
 }

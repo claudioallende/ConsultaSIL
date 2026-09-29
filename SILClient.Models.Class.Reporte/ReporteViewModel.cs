@@ -1,6 +1,7 @@
 using System;
 
-namespace SILClient.Models.Class.Reporte;
+namespace SILClient.Models.Class.Reporte
+{
 
 public class ReporteViewModel
 {
@@ -50,4 +51,5 @@ public class ReporteViewModel
 	public string Destino { get; set; }
 
 	public long Vendcyo { get; set; }
+}
 }

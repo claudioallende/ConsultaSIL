@@ -5,7 +5,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using SILClient.Models.Class.Account;
 
-namespace SILClient.Controllers;
+namespace SILClient.Controllers
+{
 
 public class AccountController : Controller
 {
@@ -79,4 +80,5 @@ public class AccountController : Controller
 			return View(model);
 		}
 	}
+}
 }

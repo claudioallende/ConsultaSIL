@@ -1,6 +1,7 @@
 using System.Web.Optimization;
 
-namespace SILClient;
+namespace SILClient
+{
 
 public class BundleConfig
 {
@@ -18,4 +19,5 @@ public class BundleConfig
 		bundles.Add(new StyleBundle("~/Content/spinner").Include("~/Content/loading.css", "~/Content/loading-btn.css"));
 		bundles.Add(new ScriptBundle("~/bundles/spinner").Include("~/Scripts/Spinner.js"));
 	}
+}
 }

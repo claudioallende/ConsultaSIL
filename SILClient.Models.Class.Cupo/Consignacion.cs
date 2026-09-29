@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SILClient.Models.Class.Cupo;
+namespace SILClient.Models.Class.Cupo
+{
 
 public class Consignacion
 {
@@ -51,4 +52,5 @@ public class Consignacion
 
 	[Display(Name = "Nombre")]
 	public string Nomdestinatario { get; set; }
+}
 }

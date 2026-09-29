@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SILClient.Models.Class.Cupo;
 
-namespace SILClient.Models.Class.Info;
+namespace SILClient.Models.Class.Info
+{
 
 public class CuposAgrupadosPorVendedor
 {
@@ -400,4 +401,5 @@ public class CuposAgrupadosPorVendedor
 		consignacion.Cuitdestinatario = CUITDESTINATARIO;
 		return consignacion;
 	}
+}
 }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace SILClient.Models.Class.Reporte;
+namespace SILClient.Models.Class.Reporte
+{
 
 public class FiltroReporteViewModel
 {
@@ -17,4 +18,5 @@ public class FiltroReporteViewModel
 
 	[Display(Name = "Fecha Hasta")]
 	public DateTime? FechaHasta { get; set; }
+}
 }

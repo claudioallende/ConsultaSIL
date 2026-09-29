@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SILClient.Models.Class.Account;
+namespace SILClient.Models.Class.Account
+{
 
 public class LoginViewModel
 {
@@ -12,4 +13,5 @@ public class LoginViewModel
 	[Display(Name = "Contraseña")]
 	[Required]
 	public string Password { get; set; }
+}
 }

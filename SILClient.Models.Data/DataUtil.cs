@@ -10,7 +10,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SILClient.Models.Class;
 
-namespace SILClient.Models.Data;
+namespace SILClient.Models.Data
+{
 
 public class DataUtil : IDisposable
 {
@@ -71,4 +72,5 @@ public class DataUtil : IDisposable
 	{
 		GC.SuppressFinalize(this);
 	}
+}
 }

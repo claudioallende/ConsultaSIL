@@ -1,4 +1,5 @@
-namespace SILClient.Models.Util.Tabla;
+namespace SILClient.Models.Util.Tabla
+{
 
 public class Column
 {
@@ -11,4 +12,5 @@ public class Column
 	public bool orderable { get; set; }
 
 	public Search search { get; set; }
+}
 }
