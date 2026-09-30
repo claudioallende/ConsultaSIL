@@ -14,6 +14,22 @@
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup />
+  <!-- Publicacion para IIS. El proyecto es SDK-style tipo biblioteca (lo genero ILSpy), asi que
+       "Publicar" solo copiaba las DLLs, aplanadas. Esto agrega el contenido del sitio (vistas,
+       estaticos, Global.asax) y el target MoverDllsABin deja las DLLs en bin\, como espera IIS.
+       No se publican a proposito: Web.config (secretos y URLs por ambiente) ni App_Data\usuarios.json
+       (credenciales): se mantienen los del servidor. -->
+  <ItemGroup>
+    <None Remove="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" />
+    <Content Include="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="MoverDllsABin" AfterTargets="Publish">
+    <ItemGroup>
+      <_SilBinPublicado Include="$(PublishDir)*.dll;$(PublishDir)*.pdb" />
+    </ItemGroup>
+    <Move SourceFiles="@(_SilBinPublicado)" DestinationFolder="$(PublishDir)bin" />
+    <Message Importance="high" Text="Sitio publicado para IIS en $(PublishDir) (DLLs en bin\). Web.config y App_Data\usuarios.json no se publican: usar los del servidor." />
+  </Target>
   <ItemGroup><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" /></ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc">
