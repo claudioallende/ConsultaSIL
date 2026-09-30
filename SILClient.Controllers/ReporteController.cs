@@ -39,10 +39,15 @@ public class ReporteController : Controller
 		try
 		{
 			ServicioReporte servicio = new ServicioReporte();
-			return Json(new
+			JsonResult result = Json(new
 			{
 				data = await servicio.GetReporte(model)
 			});
+			// Sin filtro de fechas la API devuelve todo el historial del cliente (miles de filas, ~2 MB):
+			// supera el MaxJsonLength por defecto de JavaScriptSerializer (2.097.152 caracteres) y la
+			// serializacion falla fuera del try, como un 500 sin log ("DataTables warning: Ajax error").
+			result.MaxJsonLength = int.MaxValue;
+			return result;
 		}
 		catch (Exception ex)
 		{
