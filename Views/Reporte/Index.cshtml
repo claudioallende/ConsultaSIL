@@ -75,12 +75,24 @@
             monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
         });
 
+        // Rango por defecto: 3 meses para atras y 30 dias para adelante. Sin fechas la API devuelve
+        // todo el historial del cliente (miles de filas).
+        if (!$("#FechaDesde").val()) { $("#FechaDesde").datepicker("setDate", "-3m"); }
+        if (!$("#FechaHasta").val()) { $("#FechaHasta").datepicker("setDate", "+30d"); }
+
+        // Se envia yyyy-mm-dd: el model binder parsea con la cultura del servidor, y "dd/mm/yyyy" en un
+        // servidor en ingles se lee como mm/dd (o se descarta y el reporte sale sin filtro de fechas).
+        function fechaIso(id) {
+            var fecha = $("#" + id).datepicker("getDate");
+            return fecha ? $.datepicker.formatDate("yy-mm-dd", fecha) : "";
+        }
+
         function construirDataTable() {
             model.datatable = $('#tablaReporte').DataTable({
                 "ajax": {
                     "data": {
-                        "FechaDesde": function () { return document.getElementById("FechaDesde").value },
-                        "FechaHasta": function () { return document.getElementById("FechaHasta").value },
+                        "FechaDesde": function () { return fechaIso("FechaDesde") },
+                        "FechaHasta": function () { return fechaIso("FechaHasta") },
                         "Grano": function () { return document.getElementById("Grano").value }
                     },
                     "url": '@Url.Action("GetReporte")',
