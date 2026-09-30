@@ -1,42 +1,54 @@
 ﻿@model SILClient.Models.Class.Account.LoginViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Iniciar sesión";
 }
 
-<h4>Inicio de sesión</h4>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                    </div>
+<div class="sil-auth">
+    <section class="sil-card sil-auth__card" id="loginForm">
+        <div class="sil-auth__brand">
+            <span class="sil-brand-mark"><img src="~/Content/images/logo.png" alt="ACA" /></span>
+            <div>
+                <h1>Consulta SIL</h1>
+                <p>Sistema Integral de Logística</p>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", data_sil_loader_text = "Ingresando..." }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "")
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                <div class="sil-input-icon">
+                    <i class="bi bi-person"></i>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autocomplete = "username", autofocus = "autofocus" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger small" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                <div class="sil-input-icon">
+                    <i class="bi bi-lock"></i>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", autocomplete = "current-password", style = "padding-right: 44px" })
+                    <button type="button" class="sil-pass-toggle" data-target="Password" aria-label="Mostrar contraseña">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Ingresar" class="btn btn-primary" />
-                    </div>
-                </div>
-            }
-        </section>
-    </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-4">
+                <i class="bi bi-box-arrow-in-right"></i>Ingresar
+            </button>
+        }
+
+        <div class="sil-auth__foot">Un producto de ACA</div>
+    </section>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

@@ -1,70 +1,54 @@
 ﻿@model SILClient.Models.Class.Info.DetalleViewModel
 
-<ul class="list-group list-group-striped list-group-flush">
-    @Html.Partial("_ConsignacionPartialView", Model.GetConsignacionOrEmpty())
+<section class="sil-card">
+    <div class="sil-card__header">
+        <h2 class="sil-card__title"><i class="bi bi-geo-alt"></i>@Model.Grano.Nombre · @Model.Puerto.Nombre</h2>
+    </div>
+    <ul class="sil-kv">
+        @Html.Partial("_ConsignacionPartialView", Model.GetConsignacionOrEmpty())
+        <li>
+            <span class="sil-kv__key">Destino</span>
+            <span class="sil-kv__cuit">@Model.Puerto.Cuit.Insert(Model.Puerto.Cuit.Length - 1, "-").Insert(2, "-")</span>
+            <span class="sil-kv__val">@Model.Puerto.Nombre</span>
+        </li>
+        <li class="sil-kv--wide">
+            <span class="sil-kv__key">Grano</span>
+            <span class="sil-kv__val">@Model.Grano.Nombre</span>
+        </li>
+        <li class="sil-kv--wide">
+            <span class="sil-kv__key">Dirección</span>
+            <span class="sil-kv__val">@Model.Puerto.Domicilio - @Model.Puerto.Cpostal @Model.Puerto.Nombre</span>
+        </li>
+        <li class="sil-kv--wide">
+            <span class="sil-kv__key">Nº de Planta</span>
+            <span class="sil-kv__val">@Model.Puerto.Ruca</span>
+        </li>
+        <li class="sil-kv--wide">
+            <span class="sil-kv__key">Observaciones</span>
+            <div>
+                @foreach (var Observacion in Model.GetObservaciones())
+                {
+                    <div class="sil-note">@Observacion.Valor</div>
+                }
+            </div>
+        </li>
+    </ul>
+</section>
 
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-3">
-                <span>Destino</span>
-            </div>
-            <div class="col-2">
-                <span>@Model.Puerto.Cuit.Insert(Model.Puerto.Cuit.Length - 1, "-").Insert(2, "-")</span>
-            </div>
-            <div class="col-7">
-                <span>@Model.Puerto.Nombre</span>
+@if (Model.AlfanumericosPorDia != null && Model.AlfanumericosPorDia.Count > 0)
+{
+    <section class="sil-card">
+        <div class="sil-card__header">
+            <h2 class="sil-card__title"><i class="bi bi-upc-scan"></i>Códigos de cupo por día</h2>
+            <div class="sil-legend ml-auto">
+                <span><span class="sil-legend__mark" style="background:#12b76a"></span>Cupo consumido</span>
             </div>
         </div>
-    </li>
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-3">
-                <span>Grano</span>
-            </div>
-            <div class="col-9">
-                <span>@Model.Grano.Nombre</span>
-            </div>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-3">
-                <span>Dirección</span>
-            </div>
-            <div class="col-9">
-                <span>@Model.Puerto.Domicilio - @Model.Puerto.Cpostal @Model.Puerto.Nombre</span>
-            </div>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-3">
-                <span>Nº de Planta</span>
-            </div>
-            <div class="col-9">
-                <span>@Model.Puerto.Ruca</span>
-            </div>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div>
-            <label>Observaciones</label>
-            @foreach (var Observacion in Model.GetObservaciones())
+        <div class="sil-alfa-grid">
+            @for (int Dia = 0; Dia < Model.AlfanumericosPorDia.Count; Dia++)
             {
-                <div class="grupo">
-                    <p><small>@Observacion.Valor</small></p>
-                </div>
+                @Html.Partial("_AlfanumericosPorDia", Model.AlfanumericosPorDia[Dia])
             }
         </div>
-    </li>
-</ul>
-
-<div class="row flex-row flex-nowrap row-scrollx mt-3">
-    @if (Model.AlfanumericosPorDia != null)
-    {
-        for (int Dia = 0; Dia < Model.AlfanumericosPorDia.Count; Dia++)
-        {
-            @Html.Partial("_AlfanumericosPorDia", Model.AlfanumericosPorDia[Dia])
-        }
-    }
-</div>
+    </section>
+}

@@ -1,68 +1,34 @@
 ﻿@model SILClient.Models.Class.Info.InfoViewModel
-@if (ViewData["ocultar_titulo"] == "True") {
-    <h3>No Cuenta y Orden</h3>
-}
-<h5>Informados a STOP</h5>
-@using (Html.BeginForm("Detalle", "Info", FormMethod.Post, htmlAttributes: new { @class = "mb-4" }))
-{
-    <div>
-        <table class="table table-sm table-font-sm table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    @foreach (DateTime Dia in Model.Dias)
-                    {
-                        <th colspan="2" class="border-left">@Dia.ToString("dd/MM")</th>
-                    }
-                    <th class="border-left"></th>
-                </tr>
-                <tr>
-                    <th>Grano</th>
-                    <th>Comprador</th>
-                    <th>Puerto</th>
-                    @for (var i = 0; i < Model.Dias.Count; i++)
-                    {
-                        <th class="border-left">TO</th>
-                        <th>TC</th>
-                    }
-                    <th class="border-left"></th>
-                </tr>
-            </thead>
-            @Html.Partial("_CuerpoTablaInformadoStopPartial", Model.ListaResumenesInformadosStopNoCyo)
-        </table>
+<section class="sil-card">
+    <div class="sil-card__header">
+        <h2 class="sil-card__title"><i class="bi bi-truck"></i>No Cuenta y Orden</h2>
     </div>
-}
 
-<h5>No Informados a STOP</h5>
-@using (Html.BeginForm("Detalle", "Info", FormMethod.Post))
-{
-    <div>
-        <table class="table table-sm table-font-sm table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    @foreach (DateTime Dia in Model.Dias)
-                    {
-                        <th class="border-left">@Dia.ToString("dd/MM")</th>
-                    }
-                    <th class="border-left"></th>
-                </tr>
-                <tr>
-                    <th>Grano</th>
-                    <th>Comprador</th>
-                    <th>Puerto</th>
-                    @for (var i = 0; i < Model.Dias.Count; i++)
-                    {
-                        <th class="border-left">TO</th>
-                    }
-                    <th class="border-left"></th>
-                </tr>
-            </thead>
-            @Html.Partial("_CuerpoTablaNoInformadoStopPartial", Model.ListaResumenesNoInformadosStopNoCyo)
-        </table>
+    <div class="sil-subtitle">
+        <span class="sil-badge sil-badge--stop"><i class="bi bi-broadcast"></i>Informados a STOP</span>
+        <span class="sil-badge">@Model.ListaResumenesInformadosStopNoCyo.Count filas</span>
     </div>
-}
+    @using (Html.BeginForm("Detalle", "Info", FormMethod.Post, htmlAttributes: new { @class = "mb-3", data_sil_loader_text = "Cargando detalle..." }))
+    {
+        <div class="sil-table-wrap">
+            <table class="table table-sm table-font-sm table-striped">
+                @Html.Partial("_EncabezadoDias", Model.Dias, new ViewDataDictionary { { "conConsumidos", true } })
+                @Html.Partial("_CuerpoTablaInformadoStopPartial", Model.ListaResumenesInformadosStopNoCyo)
+            </table>
+        </div>
+    }
+
+    <div class="sil-subtitle">
+        <span class="sil-badge sil-badge--nostop"><i class="bi bi-clock-history"></i>No informados a STOP</span>
+        <span class="sil-badge">@Model.ListaResumenesNoInformadosStopNoCyo.Count filas</span>
+    </div>
+    @using (Html.BeginForm("Detalle", "Info", FormMethod.Post, htmlAttributes: new { @class = "pb-2", data_sil_loader_text = "Cargando detalle..." }))
+    {
+        <div class="sil-table-wrap">
+            <table class="table table-sm table-font-sm table-striped" style="width:100%">
+                @Html.Partial("_EncabezadoDias", Model.Dias, new ViewDataDictionary { { "conConsumidos", false } })
+                @Html.Partial("_CuerpoTablaNoInformadoStopPartial", Model.ListaResumenesNoInformadosStopNoCyo)
+            </table>
+        </div>
+    }
+</section>

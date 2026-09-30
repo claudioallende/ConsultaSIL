@@ -1,58 +1,73 @@
 ﻿@model SILClient.Models.Class.Info.InfoViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cupos";
 }
 
 @section Styles{
     @Styles.Render("~/Content/datatables_columnfixed")
-    @Styles.Render("~/Content/spinner")
 }
 
-@using (Html.BeginForm("Index", "Info", FormMethod.Post, htmlAttributes: new { @class = "form-inline mb-2" }))
-{ 
-    <div class="form-group mr-4">
-        <label class="pr-3" for="Grano">Grano</label>
-        <input id="Grano" name="CodigoGrano" type="text" class="form-control form-control-sm" />
+<section class="sil-card">
+    <div class="sil-card__header">
+        <h2 class="sil-card__title"><i class="bi bi-funnel"></i>Filtros</h2>
+        <div class="sil-legend ml-auto">
+            <span><span class="sil-legend__mark"></span>Cupo Cuenta y Orden</span>
+            <span><b>TO</b> turnos otorgados</span>
+            <span><b>TC</b> turnos consumidos</span>
+        </div>
     </div>
-    <div class="form-group mr-4">
-        <label class="pr-3" for="Comprador">Comprador</label>
-        <input id="Comprador" name="CuentaComprador" type="text" class="form-control form-control-sm" />
+    <div class="sil-card__body">
+        @using (Html.BeginForm("Index", "Info", FormMethod.Post, htmlAttributes: new { @class = "sil-filters", data_sil_loader_text = "Buscando cupos..." }))
+        {
+            <div class="form-group">
+                <label for="Grano">Grano</label>
+                <div class="sil-input-icon">
+                    <i class="bi bi-search"></i>
+                    <input id="Grano" name="CodigoGrano" type="text" class="form-control form-control-sm" placeholder="Ej. Soja" autocomplete="off" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Comprador">Comprador</label>
+                <div class="sil-input-icon">
+                    <i class="bi bi-search"></i>
+                    <input id="Comprador" name="CuentaComprador" type="text" class="form-control form-control-sm" placeholder="Nombre del comprador" autocomplete="off" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Puerto">Puerto</label>
+                <div class="sil-input-icon">
+                    <i class="bi bi-search"></i>
+                    <input id="Puerto" name="CuentaPuerto" type="text" class="form-control form-control-sm" placeholder="Nombre del puerto" autocomplete="off" />
+                </div>
+            </div>
+            <div class="sil-filters__actions">
+                <a id="btnActualizar" class="btn btn-primary btn-sm" href="@Url.Action("Index")" title="Actualizar datos de pantalla" data-sil-loader="Actualizando cupos...">
+                    <i class="bi bi-arrow-clockwise"></i>Actualizar
+                </a>
+            </div>
+        }
     </div>
-    <div class="form-group mr-4">
-        <label class="pr-3" for="Puerto">Puerto</label>
-        <input id="Puerto" name="CuentaPuerto" type="text" class="form-control form-control-sm" />
-    </div>
-    <a id="btnActualizar" class="btn btn-primary btn-sm ml-auto" href="@Url.Action("Index")" title="Actualizar datos de pantalla">Actualizar</a>
-    @*<button type="submit" class="btn btn-primary">Buscar</button>*@
-}
+</section>
+
 @if (SILClient.Models.Class.ClaimsUtil.GetClaimValue(User, "EsCuentaCYO") == "True")
 {
-    @Html.Partial("_TablaCyoPartial", Model);
-                                            if (Model.ListaResumenesInformadosStopNoCyo.Count != 0 || Model.ListaResumenesNoInformadosStopNoCyo.Count != 0)
-                                            {
-        <hr />
-        @Html.Partial("_TablaNoCyoPartial", Model, new ViewDataDictionary { { "ocultar_titulo", false } });
-                                            }
+    @Html.Partial("_TablaCyoPartial", Model)
+    if (Model.ListaResumenesInformadosStopNoCyo.Count != 0 || Model.ListaResumenesNoInformadosStopNoCyo.Count != 0)
+    {
+        @Html.Partial("_TablaNoCyoPartial", Model)
+    }
 }
 else
 {
-    @Html.Partial("_TablaNoCyoPartial", Model, new ViewDataDictionary { { "ocultar_titulo", true } });
-    <hr />
-    @Html.Partial("_TablaCyoPartial", Model);
+    @Html.Partial("_TablaNoCyoPartial", Model)
+    @Html.Partial("_TablaCyoPartial", Model)
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/datatables_columnfixed")
-    @Scripts.Render("~/bundles/spinner")
     <script type="text/javascript">
         var datatables;
-        var btnActualizar = document.getElementById("btnActualizar");
-        var SpinnerActualizar = new Spinner(btnActualizar);
-
-        btnActualizar.onclick = function () {
-            SpinnerActualizar.mostrarSpinner();
-        }
 
         $(document).ready(function () {
             tables = convertirDataTable();
@@ -97,7 +112,8 @@ else
                 bInfo: false,
                 bSort: false,
                 fixedColumns: {
-                    leftColumns: 3,
+                    // En pantallas chicas Grano+Comprador+Puerto fijas tapan los dias: se fija solo Grano
+                    leftColumns: window.innerWidth < 768 ? 1 : 3,
                     rightColumns: 1
                 },
                 "language": {

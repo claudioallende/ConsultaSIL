@@ -1,0 +1,36 @@
+﻿@model IList<DateTime>
+@* Encabezado de las tablas de cupos. ViewData["conConsumidos"] = true agrega la columna TC (turnos
+   consumidos) por dia. La cantidad de columnas debe coincidir con _CuerpoTabla*Partial (DataTables
+   FixedColumns fija las 3 primeras y la ultima). *@
+@{
+    bool conConsumidos = ViewData["conConsumidos"] is bool && (bool)ViewData["conConsumidos"];
+    string[] nombreDia = { "dom", "lun", "mar", "mié", "jue", "vie", "sáb" };
+}
+<thead>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <th class="border-left text-center @(i == 0 ? "sil-today" : "")" colspan="@(conConsumidos ? 2 : 1)">
+                <span class="sil-day">@(i == 0 ? "hoy" : nombreDia[(int)Model[i].DayOfWeek])</span>@Model[i].ToString("dd/MM")
+            </th>
+        }
+        <th class="border-left"></th>
+    </tr>
+    <tr>
+        <th>Grano</th>
+        <th>Comprador</th>
+        <th>Puerto</th>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <th class="border-left text-center" title="Turnos otorgados">TO</th>
+            if (conConsumidos)
+            {
+                <th class="text-center" title="Turnos consumidos">TC</th>
+            }
+        }
+        <th class="border-left"></th>
+    </tr>
+</thead>

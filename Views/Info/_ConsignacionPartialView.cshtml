@@ -1,105 +1,41 @@
 ﻿@model SILClient.Models.Class.Cupo.Consignacion
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Solicitante</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitsolicitante</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomsolicitante</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Solicitante</span>
+    <span class="sil-kv__cuit">@Model.Cuitsolicitante</span>
+    <span class="sil-kv__val">@Model.Nomsolicitante</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Intermediario</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitintermediario</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomintermediario</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Intermediario</span>
+    <span class="sil-kv__cuit">@Model.Cuitintermediario</span>
+    <span class="sil-kv__val">@Model.Nomintermediario</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Remitente Comercial</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitrtecomercial</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomrtecomercial</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Remitente Comercial</span>
+    <span class="sil-kv__cuit">@Model.Cuitrtecomercial</span>
+    <span class="sil-kv__val">@Model.Nomrtecomercial</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Corredor Comprador</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitcorrcomp</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomcorrcomp</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Corredor Comprador</span>
+    <span class="sil-kv__cuit">@Model.Cuitcorrcomp</span>
+    <span class="sil-kv__val">@Model.Nomcorrcomp</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Mercado a Término</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitmat</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nommat</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Mercado a Término</span>
+    <span class="sil-kv__cuit">@Model.Cuitmat</span>
+    <span class="sil-kv__val">@Model.Nommat</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Corredor Vendedor</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitcorrvta</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomcorrvta</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Corredor Vendedor</span>
+    <span class="sil-kv__cuit">@Model.Cuitcorrvta</span>
+    <span class="sil-kv__val">@Model.Nomcorrvta</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Representante/Entregador</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitrteent</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomrteent</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Representante/Entregador</span>
+    <span class="sil-kv__cuit">@Model.Cuitrteent</span>
+    <span class="sil-kv__val">@Model.Nomrteent</span>
 </li>
-<li class="list-group-item">
-    <div class="row">
-        <div class="col-3">
-            <span>Destinatario</span>
-        </div>
-        <div class="col-2">
-            <span>@Model.Cuitdestinatario</span>
-        </div>
-        <div class="col-7">
-            <span>@Model.Nomdestinatario</span>
-        </div>
-    </div>
+<li>
+    <span class="sil-kv__key">Destinatario</span>
+    <span class="sil-kv__cuit">@Model.Cuitdestinatario</span>
+    <span class="sil-kv__val">@Model.Nomdestinatario</span>
 </li>

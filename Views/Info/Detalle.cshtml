@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<SILClient.Models.Class.Info.DetalleViewModel>
 
 @{
-    ViewBag.Title = "Detalle";
+    ViewBag.Title = "Detalle del cupo";
 }
 
-<h2>Detalle</h2>
+<div class="mb-3">
+    <a class="btn btn-light btn-sm" href="@Url.Action("Index")" data-sil-loader="Cargando cupos...">
+        <i class="bi bi-arrow-left"></i>Volver a cupos
+    </a>
+</div>
 
-@Html.ValidationMessage("Error")
+@Html.ValidationMessage("Error", new { @class = "text-danger d-block mb-3" })
 
 @if (Model.Count() > 1)
 {
@@ -18,13 +22,13 @@
             <div class="card">
                 <div class="card-header" id="encabezado_@newGUID">
                     <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse_@newGUID" aria-expanded="false" aria-controls="collapse_@Detalle.CuentaVendedor">
-                            Solicitante @Detalle.Consignacion.Nomsolicitante
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse_@newGUID" aria-expanded="false" aria-controls="collapse_@newGUID">
+                            <i class="bi bi-person-badge"></i>Solicitante @Detalle.Consignacion.Nomsolicitante
                         </button>
                     </h2>
                 </div>
-                <div id="collapse_@newGUID" class="collapse" aria-labelledby="heading_@newGUID" data-parent="#accordion_detalles">
-                    <div class="card-body">
+                <div id="collapse_@newGUID" class="collapse" aria-labelledby="encabezado_@newGUID" data-parent="#accordion_detalles">
+                    <div class="pt-3">
                         @Html.Partial("_DetallePartial", Detalle)
                     </div>
                 </div>
@@ -35,4 +39,12 @@
 else if (Model.Count() == 1)
 {
     @Html.Partial("_DetallePartial", Model.ElementAt(0))
+}
+else if (ViewData.ModelState.IsValid)
+{
+    <section class="sil-card">
+        <div class="sil-card__body pt-3 text-muted">
+            <i class="bi bi-info-circle"></i> No se encontraron cupos para esta combinación.
+        </div>
+    </section>
 }

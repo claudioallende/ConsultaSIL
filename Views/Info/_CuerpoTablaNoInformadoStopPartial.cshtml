@@ -10,10 +10,10 @@
             <td class="text-nowrap">@Resumen.PUERTO</td>
             @foreach (SILClient.Models.Class.Info.ResumenDia Dia in Resumen.GetDias())
             {
-                <td class="text-center border-left">@Dia.TurnosOtorgados</td>
+                <td class="text-center border-left @(Dia.TurnosOtorgados == 0 ? "sil-zero" : "sil-val")">@Dia.TurnosOtorgados</td>
             }
-            <td class="border-left">
-                <button type="submit" class="btn btn-primary btn-sm"
+            <td class="border-left text-center">
+                <button type="submit" class="btn-detalle" title="Ver detalle"
                         value="@(Json.Encode(new
                                    {
                                        CuentaComprador = Resumen.COMPCTA,
@@ -24,7 +24,7 @@
                                        EsCYO = Resumen.EsCYO()
                                    }))"
                         name="JsonId">
-                    <span class="oi oi-list"></span>
+                    <i class="bi bi-list-ul"></i>
                 </button>
             </td>
         </tr>
