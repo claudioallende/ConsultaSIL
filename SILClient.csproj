@@ -22,13 +22,17 @@
   <ItemGroup>
     <None Remove="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" />
     <Content Include="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
+    <!-- App_Data se publica solo con el script que genera usuarios.json (sin datos sensibles) -->
+    <None Remove="App_Data\Generar-UsuariosJson.ps1" />
+    <Content Include="App_Data\Generar-UsuariosJson.ps1" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="MoverDllsABin" AfterTargets="Publish">
     <ItemGroup>
       <_SilBinPublicado Include="$(PublishDir)*.dll;$(PublishDir)*.pdb" />
     </ItemGroup>
     <Move SourceFiles="@(_SilBinPublicado)" DestinationFolder="$(PublishDir)bin" />
-    <Message Importance="high" Text="Sitio publicado para IIS en $(PublishDir) (DLLs en bin\). Web.config y App_Data\usuarios.json no se publican: usar los del servidor." />
+    <MakeDir Directories="$(PublishDir)App_Data" />
+    <Message Importance="high" Text="Sitio publicado para IIS en $(PublishDir) (DLLs en bin\). Web.config y App_Data\usuarios.json no se publican: copiar Web.config a la raiz y usuarios.json a App_Data\ (o usar los del servidor)." />
   </Target>
   <ItemGroup><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" /></ItemGroup>
   <ItemGroup>
