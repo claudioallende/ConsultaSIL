@@ -20,8 +20,8 @@
        No se publican a proposito: Web.config (secretos y URLs por ambiente) ni App_Data\usuarios.json
        (credenciales): se mantienen los del servidor. -->
   <ItemGroup>
-    <None Remove="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" />
-    <Content Include="Views\**;Content\**;Scripts\**;fonts\**;Global.asax;favicon.ico;NLog.config" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
+    <None Remove="Views\**;Content\**;Scripts\**;fonts\**;Manuales\**;Global.asax;favicon.ico;NLog.config" />
+    <Content Include="Views\**;Content\**;Scripts\**;fonts\**;Manuales\**;Global.asax;favicon.ico;NLog.config" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
     <!-- App_Data se publica solo con el script que genera usuarios.json (sin datos sensibles) -->
     <None Remove="App_Data\Generar-UsuariosJson.ps1" />
     <Content Include="App_Data\Generar-UsuariosJson.ps1" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
